@@ -5,6 +5,13 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import SellerDashboard from "./pages/SellerDashboard";
+import ManageProducts from "./pages/ManageProducts";
+import ViewOrders from "./pages/ViewOrders";
+import AccountSettings from "./pages/AccountSettings";
+import Confirmation from "./pages/Confirmation";
+import SearchResults from "./pages/SearchResults";
+import ProductDetails from "./pages/ProductDetails";
 
 import {
   Home,
@@ -40,6 +47,16 @@ root.render(
           <Route path="/return" element={<Return />} />
           <Route path="*" element={<PageNotFound />} />
           <Route path="/product/*" element={<PageNotFound />} />
+          <Route path="/seller-dashboard" element={<SellerDashboard />} />
+          <Route path="/manage-products" element={<ManageProducts />} />
+          <Route path="/view-orders" element={<ViewOrders />} />
+          <Route path="/account-settings" element={<AccountSettings />} />
+          <Route path="/" element={<Products />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/confirmation" element={<Confirmation />} />
+          <Route path="/search" element={<SearchResults />} />
+
+          <Route path="/product-details" element={<ProductDetails />} />
         </Routes>
       </Provider>
     </ScrollToTop>

@@ -1,110 +1,153 @@
-import React from "react";
-import { Footer, Navbar } from "../components";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Navbar, Footer } from "../components";
+import {
+  TextField,
+  Button,
+  Container,
+  Box,
+  Grid,
+  Paper,
+  Typography,
+  MenuItem,
+} from "@mui/material";
+
 const Register = () => {
-  let [register, setRegister] = React.useState({
+  const [register, setRegister] = useState({
     name: "",
     email: "",
     password: "",
     role: "",
   });
   
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setRegister({ ...register, [name]: value });
   };
-    const handleSubmit = (e) => {
-        sessionStorage.setItem(register.email,register );
-        }   
-          
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Save user data to sessionStorage
+    const allUsersData = JSON.parse(sessionStorage.getItem("allUsersData")) || {};
+    allUsersData[register.email] = register;
+    sessionStorage.setItem("allUsersData", JSON.stringify(allUsersData));
+
+    
+    navigate("/login");
+  };
+
   return (
-    <>
+    <Box
+      sx={{
+        minHeight: "100vh",
+        backgroundColor: "#f5f5f5",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      {/* Navbar */}
       <Navbar />
-      <div className="container my-3 py-3">
-        <h1 className="text-center">Register</h1>
-        <hr />
-        <div class="row my-4 h-100">
-          <div className="col-md-4 col-lg-4 col-sm-8 mx-auto">
-            <form>
-              <div class="form my-3">
-                <label for="Name">Full Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="Name"
-                  placeholder="Enter Your Name"
-                  onChange={handleChange}
+
+      {/* Register Section */}
+      <Container maxWidth="md" sx={{ flexGrow: 1, display: "flex", alignItems: "center" }}>
+        <Paper elevation={3} sx={{ padding: "30px", borderRadius: "10px", width: "100%" }}>
+          <Grid container spacing={2} alignItems="center">
+            {/* Left Section: Image */}
+            <Grid item xs={12} md={6}>
+              <img
+                src="https://cdn.pixabay.com/photo/2021/12/27/19/28/e-commerce-6898102_1280.png"
+                alt="Register Illustration"
+                style={{ width: "100%", borderRadius: "10px" }}
+              />
+            </Grid>
+
+            {/* Right Section: Register Form */}
+            <Grid item xs={12} md={6}>
+              <Box sx={{ textAlign: "center" }}>
+                <Typography variant="h5" gutterBottom>
+                  Create Your Account
+                </Typography>
+              </Box>
+              <form onSubmit={handleSubmit}>
+                <TextField
+                  label="Full Name"
+                  variant="outlined"
+                  fullWidth
+                  margin="normal"
                   name="name"
                   value={register.name}
+                  onChange={handleChange}
                   required
                 />
-              </div>
-              <div class="form my-3">
-                <label for="Email">Email address</label>
-                <input
+                <TextField
+                  label="Email Address"
                   type="email"
-                  class="form-control"
-                  id="Email"
-                  placeholder="name@example.com"
-                  onChange={handleChange}
+                  variant="outlined"
+                  fullWidth
+                  margin="normal"
                   name="email"
                   value={register.email}
-                  
-                />
-              </div>
-              <div class="form  my-3">
-                <label for="Password">Password</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="Password"
-                  placeholder="Password"
                   onChange={handleChange}
+                  required
+                />
+                <TextField
+                  label="Password"
+                  type="password"
+                  variant="outlined"
+                  fullWidth
+                  margin="normal"
                   name="password"
                   value={register.password}
-                 
-                />
-              </div>
-              <div calss Name="reg-as">
-                <p>Register as</p>
-                <select
-                  className="form-select"
-                  aria-label="Default select example"
                   onChange={handleChange}
+                  required
+                />
+                <TextField
+                  select
+                  label="Register as"
+                  variant="outlined"
+                  fullWidth
+                  margin="normal"
                   name="role"
                   value={register.role}
+                  onChange={handleChange}
                   required
                 >
-                  <option selected>Choose...</option>
-                  <option value="1">Seller</option>
-                  <option value="2">Buyer</option>
-                </select>
-                {console.log(register)}
-              </div>
-              <div className="my-3">
-                <p>
-                  Already has an account?{" "}
-                  <Link
-                    to="/login"
-                    className="text-decoration-underline text-info"
-                  >
-                    Login
-                  </Link>{" "}
-                </p>
-              </div>
-
-              <div className="text-center">
-                <button class="my-2 mx-auto btn btn-dark" type="submit" onClick={handleSubmit}> 
+                  <MenuItem value="seller">Seller</MenuItem>
+                  <MenuItem value="buyer">Buyer</MenuItem>
+                </TextField>
+                <Box sx={{ textAlign: "center", mt: 2 }}>
+                  <Typography variant="body2">
+                    Already have an account?{" "}
+                    <Button
+                      variant="text"
+                      color="primary"
+                      onClick={() => navigate("/login")}
+                    >
+                      Login
+                    </Button>
+                  </Typography>
+                </Box>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  sx={{ mt: 3, mb: 2 }}
+                >
                   Register
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+                </Button>
+              </form>
+            </Grid>
+          </Grid>
+        </Paper>
+      </Container>
+
+      {/* Footer */}
       <Footer />
-    </>
+    </Box>
   );
 };
 
