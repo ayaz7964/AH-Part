@@ -31,7 +31,7 @@ const Navbar = () => {
       <div className="container">
         {/* Brand Logo */}
         <NavLink className="navbar-brand fw-bold fs-3" to="/">
-          <i className="fa fa-shopping-bag me-2"></i>ShopWithAyaz
+          <i className="fa fa-shopping-bag me-2"></i>ShopWithError404
         </NavLink>
 
         {/* Toggler for Mobile View */}
@@ -103,6 +103,9 @@ const Navbar = () => {
               </>
             ) : (
               <>
+              <NavLink to="/return" className="btn btn-outline-light">
+              <i className="fa fa-undo me-1"></i> Returns 
+            </NavLink>
                 <NavLink to="/login" className="btn btn-outline-light me-2">
                   <i className="fa fa-sign-in-alt me-1"></i> Login
                 </NavLink>
@@ -114,9 +117,7 @@ const Navbar = () => {
             <NavLink to="/cart" className="btn btn-outline-light me-2">
               <i className="fa fa-shopping-cart me-1"></i> Cart ({state.length})
             </NavLink>
-            {/* <NavLink to="/returns" className="btn btn-outline-light">
-              <i className="fa fa-undo me-1"></i> Returns
-            </NavLink> */}
+            
           </div>
         </div>
       </div>

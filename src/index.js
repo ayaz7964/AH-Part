@@ -12,6 +12,7 @@ import AccountSettings from "./pages/AccountSettings";
 import Confirmation from "./pages/Confirmation";
 import SearchResults from "./pages/SearchResults";
 import ProductDetails from "./pages/ProductDetails";
+// import Return from "./pages/Return";
 
 import {
   Home,
@@ -44,7 +45,7 @@ root.render(
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/return" element={<Return />} />
+         
           <Route path="*" element={<PageNotFound />} />
           <Route path="/product/*" element={<PageNotFound />} />
           <Route path="/seller-dashboard" element={<SellerDashboard />} />
@@ -55,8 +56,10 @@ root.render(
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/confirmation" element={<Confirmation />} />
           <Route path="/search" element={<SearchResults />} />
-
           <Route path="/product-details" element={<ProductDetails />} />
+
+          <Route path="/return" element={<Return />} />
+        
         </Routes>
       </Provider>
     </ScrollToTop>
